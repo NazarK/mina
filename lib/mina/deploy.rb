@@ -136,3 +136,14 @@ task :run, [:command] => [:environment] do |t, args|
 
   queue %[cd #{deploy_to!} && #{command}]
 end
+
+
+# Creates git commit and pushes all changes to 'origin' repo
+desc "Commit all changes and push to remote repo"
+task :push do
+  comment = ENV['m'] || '-'
+  puts "using commit comment: #{comment}"
+  system "git add ."
+  system "git commit -am \"#{comment}\""
+  system "git push origin #{repo}"
+end
