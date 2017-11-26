@@ -145,11 +145,11 @@ task :push do
   puts "using commit comment: #{comment}"
   system "git add ."
   system "git commit -am \"#{comment}\""
-  system "git push origin #{repo}"
+  system "git push origin #{branch}"
 end
 
 
-# Same as mina :ssh, but logs into 'current' folder
+# Same as mina ssh, but logs into 'current' folder
 task :shell do
   system "echo 'logging into shell on server'"
   system "ssh #{user}@#{domain} -t \"cd #{deploy_to}/current; bash --login\""
