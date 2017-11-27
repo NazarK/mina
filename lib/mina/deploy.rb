@@ -141,11 +141,14 @@ end
 # Creates git commit and pushes all changes to 'origin' repo
 desc "Commit all changes and push to remote repo"
 task :push do
-  comment = ENV['m'] || '-'
-  puts "using commit comment: #{comment}"
-  system "git add ."
-  system "git commit -am \"#{comment}\""
-  system "git push origin #{branch}"
+  #env var (when using "system 'mina push'" in deploy hook for example)
+  if !ENV["NOCOMMIT"] && !ENV["NOCOM"]
+    comment = ENV['m'] || '-'
+    puts "using commit comment: #{comment}"
+    system "git add ."
+    system "git commit -am \"#{comment}\""
+    system "git push origin #{branch}"
+  end
 end
 
 
